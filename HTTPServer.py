@@ -3,7 +3,7 @@
 # https://stackoverflow.com/questions/17453212/multi-threaded-tcp-server-in-python
 from socket import *
 from datetime import date
-import threading, logging
+import threading, logging, os
 
 class clientThread(threading.Thread):
     """This class is use to create a client thread for a HTTP connection"""
@@ -23,14 +23,45 @@ class clientThread(threading.Thread):
         clientRequestStr = self.socket.recv(1024)
         logging.getLogger('ThreadingHTTPServer').info("clientRequestStr is:\n" + clientRequestStr)
 
-        #change to http status 200/ others 
-        self.socket.send("""HTTP/1.1 200 OK
-Content-Type: text/html
+        isBadReq = False
+        requestedFileName = ""        
+        urlStartPos = clientRequestStr.find("GET /")
+        if urlStartPos != -1:
+            urlEndPos = clientRequestStr.find("HTTP", urlStartPos)
+            if urlEndPos != -1:
+                requestedFileName = clientRequestStr[urlStartPos + 5:urlEndPos - 1]
+        if "favicon.ico" == requestedFileName or "" == requestedFileName:
+            isBadReq == True
+        logging.getLogger('ThreadingHTTPServer').info("clientRequest file is: " + requestedFileName)
 
-<html><body>Hello World</body></html>
-""")
-        logging.getLogger('ThreadingHTTPServer').info("Client disconnected..., killing thread for" +self.ip+":"+str(self.port))
-        self.socket.close()
+        if isBadReq == True:
+            self.socket.send("""HTTP/1.1 400 Bad Request
+                            Content-Type: text/html
+
+                            <html><body>Hello World</body></html>
+                            """)
+            self.socket.close()
+        else:
+            if os.path.isfile('./' + requestedFileName):
+                f = open(requestedFileName, "rb")
+                l = f.read(1024)
+                self.socket.send("""HTTP/1.1 200 OK
+                                Content-Type: text/html
+
+                                <html><body>Hello World</body></html>
+                                """)
+                self.socket.send(l)
+                self.socket.close()
+            else:
+                self.socket.send("""HTTP/1.1 404 File Not Found
+                                Content-Type: text/html
+
+                                <html><body>404 File Not Found</body></html>
+                                """)
+                self.socket.close()
+
+        logging.getLogger('ThreadingHTTPServer').info("Disconnected to client ..., killing thread for: " +self.ip+":"+str(self.port)) 
+        return 
 
 def initLogger():
     """Create a logger and log file named with today's day + connectionLog.txt """
@@ -43,8 +74,8 @@ def initLogger():
                                 level=logging.DEBUG)
     logging.getLogger('ThreadingHTTPServer').info("The logger is initialized")
 
-def run(port=12000):
-    """Accept the port parameter (default is 12000) and start to listen to HTTP/TCP connections from client with corresponding port number.
+def run(port=80):
+    """Accept the port parameter (default is 80 for HTTP) and start to listen to HTTP/TCP connections from client with corresponding port number.
         When new connection received from client, it will create a new thread from class clientThread to handle it"""
     
     try:
