@@ -1,8 +1,6 @@
-# https://www.tutorialspoint.com/python/python_multithreading.htm
-# https://stackoverflow.com/questions/17453212/multi-threaded-tcp-server-in-python
 from socket import *
 from datetime import date, datetime
-import threading, logging, os
+import threading, logging, os, time
 
 class clientThread(threading.Thread):
     """This class is use to create a client thread for a HTTP connection"""
@@ -14,105 +12,157 @@ class clientThread(threading.Thread):
         self.ip = ip
         self.port = port
         self.socket = socket
+        self.live = True
+        self.threadLiveTime = time.time() + 5 # default live time of the thread to listen connection is 5s
         logging.getLogger('ThreadingHTTPServer').info("[+] New thread started for "+ip+":"+str(port))
 
     def run(self):
         """Overriding the thread run funtion, this fuction will get the client's request and response"""
         
-        clientRequestStr = self.socket.recv(1024).decode()
-        logging.getLogger('ThreadingHTTPServer').info("clientRequestStr is:\n" + clientRequestStr)
+        while (self.live == True) and (time.time() < self.threadLiveTime):
+            clientRequestStr = self.socket.recv(1024).decode()
+            logging.getLogger('ThreadingHTTPServer').info("clientRequestStr is:\n" + clientRequestStr)
 
-        headers = clientRequestStr.split("\n")
-        fields = headers[0].split(" ")
-        requestType = fields[0]
-        requestedFileName = fields[1]
+            headers = clientRequestStr.split("\n")
+            fields = headers[0].split(" ")
+            requestType = fields[0]
+            requestedFileName = fields[1]
 
-        isBadReq = False
-        if requestType != "GET" or "favicon.ico" == requestedFileName or "" == requestedFileName:
-            isBadReq == True
-        logging.getLogger('ThreadingHTTPServer').info("clientRequest file is: " + requestedFileName)
-
-        if isBadReq == True:
-            # Bad Request
-            response = "HTTP/1.1 400 Bad Request\n\n<html><body><h1>400 Bad Request</h1></body></html>"
-            self.socket.send(response.encode())
-            self.socket.close()
-        else:
-            # file found
-            if requestedFileName == "/":
-                requestedFileName = "/index.html"
-
-            if os.path.isfile('.' + requestedFileName):
-
-                # Get the last modified time, 
-                lastModifiedTime = os.path.getmtime('./' + requestedFileName)
-                lastModifiedTimeStr = datetime.fromtimestamp(lastModifiedTime).strftime('%a, %d %b %Y %H:%M:%S GMT')
-                logging.getLogger('ThreadingHTTPServer').info("lastModifiedTime is: " + lastModifiedTimeStr)
-                lastModifiedTimeHeadStr = "Last-Modified: " + lastModifiedTimeStr
-
-                # Get the file length
-                contentLength = os.path.getsize('./' + requestedFileName)
-                contentLengthStr = "Content-Length: " + str(contentLength)
-
-                # Get the file type
-                imageFileType = ["jpg","png","gif"]
-                # textFileType = ["txt",]
-                fileType = requestedFileName.split(".")[-1]
-                fileTypeStr = "Content-Type: text/html"
-                if fileType in imageFileType:
-                    fileTypeStr = "Content-Type: image/" + fileType
-                    logging.getLogger('ThreadingHTTPServer').info(fileTypeStr)
-
-                headerStr = ""
-                contentStr = ""
-                if fileTypeStr == "Content-Type: text/html":
-                    f = open('.' + requestedFileName)
-                    headerStr = """HTTP/1.1 200 OK\r\n""" + \
-                                lastModifiedTimeHeadStr + """\r\n""" + \
-                                contentLengthStr + """\r\n""" + \
-                                fileTypeStr + """\r\n\r\n"""  
-                    contentStr = f.read() 
-                    f.close()
-
-                    self.socket.send(headerStr.encode())
-                    self.socket.send(contentStr.encode())
-                else:
-                    f = open('.' + requestedFileName, "rb") # read image in binary 
-                    headerStr = """HTTP/1.1 200 OK\r\n""" + \
-                                lastModifiedTimeHeadStr + """\r\n""" + \
-                                """Accept-Ranges: bytes\r\n""" + \
-                                contentLengthStr + """\r\n""" + \
-                                fileTypeStr + """\r\n\r\n"""     
-                    contentStr = f.read()
-                    f.close()
-
-                    self.socket.send(headerStr.encode())
-                    self.socket.send(contentStr)
-                logging.getLogger('ThreadingHTTPServer').info("headerStr:" + headerStr)
-                
-                # Example
-                # HTTP/1.1 200 OK\r\n
-                # Date: Sun, 26 Sep 2010 20:09:20 GMT\r\n
-                # Server: Apache/2.0.52 (CentOS)\r\n
-                # Last-Modified: Tue, 30 Oct 2007 17:00:02 GMT\r\n
-                # ETag: "17dc6-a5c-bf716880"\r\n
-                # Accept-Ranges: bytes\r\n
-                # Content-Length: 2652\r\n
-                # Keep-Alive: timeout=10, max=100\r\n
-                # Connection: Keep-Alive\r\n
-                # Content-Type: text/html;
-
-                # headers = {"If-Modified-Since ": timestamp}
-
-                self.socket.close()
-            else:
-                # File not found
-                response = "HTTP/1.1 404 Not Found\n\n<html><body><h1>404 File Not Found</h1></body></html>"
+            requestTypeNumber = 200
+            if requestType != "GET"  or requestType != "HEAD" or "favicon.ico" == requestedFileName:
+                requestTypeNumber == 400
+            
+            if requestTypeNumber == 400:
+                # Bad Request
+                response = "HTTP/1.1 400 Bad Request\n\n<html><body><h1>400 Bad Request</h1></body></html>"
                 self.socket.send(response.encode())
-                self.socket.close()
+                logging.getLogger('ThreadingHTTPServer').info(response)
+                self.live = False
+            else:
+                if requestedFileName == "/":
+                    requestedFileName = "/index.html"
 
+                # file found
+                if os.path.isfile('.' + requestedFileName):
+
+                    connectionStr, keepAliveTimeStr, keepAliveTime = self.getRequestedConnectionStatus(clientRequestStr)
+                    lastModifiedTimeStr, contentLengthStr = self.getLocalFileStatus(requestedFileName)
+                    
+                    # compare the last modified time with brower file and local file 
+                    findStr = "If-Modified-Since: "
+                    clientLastModifiedTime = "0"
+                    clientLastModifiedTimeStr = ""
+                    isModified = True
+                    urlStartPos = clientRequestStr.find(findStr)
+                    if urlStartPos != -1:
+                        urlEndPos = clientRequestStr.find("\r", urlStartPos)
+                        if urlEndPos != -1:
+                            clientLastModifiedTime = clientRequestStr[urlStartPos + len(findStr):urlEndPos]
+                            clientLastModifiedTimeStr = "Last-Modified: " + clientLastModifiedTime
+
+                    if clientLastModifiedTimeStr == lastModifiedTimeStr:
+                        isModified = False
+
+                    # Get the file type
+                    imageFileType = ["jpg","png","gif"]
+                    # textFileType = ["txt",]
+                    fileType = requestedFileName.split(".")[-1]
+                    fileTypeStr = "Content-Type: text/html"
+                    if fileType in imageFileType:
+                        fileTypeStr = "Content-Type: image/" + fileType
+
+                    headerStr = ""
+                    contentStr = ""
+                    if isModified == True:
+                        if fileTypeStr == "Content-Type: text/html":
+                            f = open('.' + requestedFileName)
+                            headerStr = """HTTP/1.1 200 OK\r\n""" + \
+                                        "Server: Python 2.7\r\n" + \
+                                        lastModifiedTimeStr + """\r\n""" + \
+                                        contentLengthStr + """\r\n""" + \
+                                        keepAliveTimeStr + """\r\n""" + \
+                                        connectionStr + """\r\n""" + \
+                                        fileTypeStr + """\r\n\r\n"""  
+                            contentStr = f.read() 
+                            f.close()
+
+                            self.socket.send(headerStr.encode())
+                            if requestType != "HEAD":
+                                self.socket.send(contentStr.encode())
+                        else:
+                            f = open('.' + requestedFileName, "rb") # read image in binary 
+                            headerStr = """HTTP/1.1 200 OK\r\n""" + \
+                                        "Server: Python 2.7\r\n" + \
+                                        lastModifiedTimeStr + """\r\n""" + \
+                                        """Accept-Ranges: bytes\r\n""" + \
+                                        contentLengthStr + """\r\n""" + \
+                                        keepAliveTimeStr + """\r\n""" + \
+                                        connectionStr + """\r\n""" + \
+                                        fileTypeStr + """\r\n\r\n"""     
+                            contentStr = f.read()
+                            f.close()
+
+                            self.socket.send(headerStr.encode())
+                            if requestType != "HEAD":
+                                self.socket.send(contentStr)
+                    else:
+                        headerStr = "HTTP/1.1 304 Not Modified\n\n"
+                        self.socket.send(headerStr.encode())
+
+                    logging.getLogger('ThreadingHTTPServer').info("Response headerStr is:\n" + headerStr)
+
+                    if connectionStr == "Connection: Keep-Alive":
+                        self.threadLiveTime = time.time() + float(keepAliveTime)
+                    else:
+                        self.live = False
+
+                # file not found
+                else:
+                    response = "HTTP/1.1 404 Not Found\n\n<html><body><h1>404 File Not Found</h1></body></html>"
+                    self.socket.send(response.encode())
+                    logging.getLogger('ThreadingHTTPServer').info(response)
+                    self.live = False
+
+        self.socket.close()
         logging.getLogger('ThreadingHTTPServer').info("Disconnected to client ..., killing thread for: " +self.ip+":"+str(self.port)) 
         return 
+
+    def getRequestedConnectionStatus(self, requestStr):
+        """ Get the client requested connection status and return a str as connection staus and a time to indicate the alive time"""
+
+        findStr = "Connection: "
+        requestedConnection = "Connection: close" 
+        connectionStr = "Connection: Keep-Alive" # default connection is Keep-Alive if not specified by client
+        urlStartPos = requestStr.find(findStr)
+        if urlStartPos != -1:
+            urlEndPos = requestStr.find("\r", urlStartPos)
+            if urlEndPos != -1:
+                requestedConnection = requestStr[urlStartPos + len(findStr):urlEndPos]
+        if requestedConnection.lower() != "keep-alive":
+            connectionStr = "Connection: close"
+
+        findStr = "Keep-Alive: "
+        keepAliveTime = "5" # default keep alive time is 5sec if not specified by client
+        keepAliveTimeStr = ""
+        urlStartPos = requestStr.find(findStr)
+        if urlStartPos != -1:
+            urlEndPos = requestStr.find("\r", urlStartPos)
+            if urlEndPos != -1:
+                keepAliveTime = requestStr[urlStartPos + len(findStr):urlEndPos]
+        if int(keepAliveTime) != 0:
+            keepAliveTimeStr = "Keep-Alive: timeout=" + keepAliveTime + ", max=100"
+        return connectionStr, keepAliveTimeStr, keepAliveTime
+
+    def getLocalFileStatus(self, requestedFileName):
+        """ Get the requested file status and return the last modify time and file length"""
+        # Get the last modified time of the requested file 
+        lastModifiedTime = os.path.getmtime('./' + requestedFileName)
+        lastModifiedTimeStr = "Last-Modified: " + datetime.fromtimestamp(lastModifiedTime).strftime('%a, %d %b %Y %H:%M:%S GMT')
+
+        # Get the file length
+        contentLength = os.path.getsize('./' + requestedFileName)
+        contentLengthStr = "Content-Length: " + str(contentLength)
+        return lastModifiedTimeStr, contentLengthStr
 
 def initLogger():
     """Create a logger and log file named with today's day + connectionLog.txt """
