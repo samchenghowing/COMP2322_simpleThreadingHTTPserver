@@ -27,10 +27,10 @@ class clientThread(threading.Thread):
             fields = headers[0].split(" ")
             requestType = fields[0]
             requestedFileName = fields[1]
-
             requestTypeNumber = 200
+
             if requestType != "GET"  or requestType != "HEAD" or "favicon.ico" == requestedFileName:
-                requestTypeNumber == 400
+                requestTypeNumber = 400
             
             if requestTypeNumber == 400:
                 # Bad Request
@@ -46,7 +46,7 @@ class clientThread(threading.Thread):
                 if os.path.isfile('.' + requestedFileName):
 
                     connectionStr, keepAliveTimeStr, keepAliveTime = self.getRequestedConnectionStatus(clientRequestStr)
-                    lastModifiedTimeStr, contentLengthStr = self.getLocalFileStatus(requestedFileName)
+                    lastModifiedTimeStr, contentLengthStr, fileTypeStr = self.getLocalFileStatus(requestedFileName)
                     
                     # compare the last modified time with brower file and local file 
                     findStr = "If-Modified-Since: "
@@ -59,21 +59,15 @@ class clientThread(threading.Thread):
                         if urlEndPos != -1:
                             clientLastModifiedTime = clientRequestStr[urlStartPos + len(findStr):urlEndPos]
                             clientLastModifiedTimeStr = "Last-Modified: " + clientLastModifiedTime
-
                     if clientLastModifiedTimeStr == lastModifiedTimeStr:
                         isModified = False
 
-                    # Get the file type
-                    imageFileType = ["jpg","png","gif"]
-                    # textFileType = ["txt",]
-                    fileType = requestedFileName.split(".")[-1]
-                    fileTypeStr = "Content-Type: text/html"
-                    if fileType in imageFileType:
-                        fileTypeStr = "Content-Type: image/" + fileType
-
                     headerStr = ""
                     contentStr = ""
-                    if isModified == True:
+                    if isModified == False:
+                        headerStr = "HTTP/1.1 200 OK\n\n"
+                        self.socket.send(headerStr.encode())
+                    else:
                         if fileTypeStr == "Content-Type: text/html":
                             f = open('.' + requestedFileName)
                             headerStr = """HTTP/1.1 200 OK\r\n""" + \
@@ -105,9 +99,6 @@ class clientThread(threading.Thread):
                             self.socket.send(headerStr.encode())
                             if requestType != "HEAD":
                                 self.socket.send(contentStr)
-                    else:
-                        headerStr = "HTTP/1.1 304 Not Modified\n\n"
-                        self.socket.send(headerStr.encode())
 
                     logging.getLogger('ThreadingHTTPServer').info("Response headerStr is:\n" + headerStr)
 
@@ -162,7 +153,15 @@ class clientThread(threading.Thread):
         # Get the file length
         contentLength = os.path.getsize('./' + requestedFileName)
         contentLengthStr = "Content-Length: " + str(contentLength)
-        return lastModifiedTimeStr, contentLengthStr
+
+        # Get the file type
+        imageFileType = ["jpg","png","gif", "apng", "avif", "jpeg", "jfif", "pjpeg", "pjp", "svg", "webp"]
+        fileType = requestedFileName.split(".")[-1]
+        fileTypeStr = "Content-Type: text/html"
+        if fileType in imageFileType:
+            fileTypeStr = "Content-Type: image/" + fileType
+        return lastModifiedTimeStr, contentLengthStr, fileTypeStr
+
 
 def initLogger():
     """Create a logger and log file named with today's day + connectionLog.txt """
@@ -189,7 +188,7 @@ def run(port=80):
 
         while True:
             serverSocket.listen(5)
-            logging.getLogger('ThreadingHTTPServer').info("Listening for incoming connections...")
+            logging.getLogger('ThreadingHTTPServer').info("Listening for incoming connections on port:" + str(port) + "...")
             (clientsock, (clientIP, clientPort)) = serverSocket.accept()
             newthread = clientThread(clientIP, clientPort, clientsock)
             newthread.start()
