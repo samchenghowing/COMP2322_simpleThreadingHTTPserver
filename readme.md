@@ -1,3 +1,5 @@
+This program is a simple python threading HTTP Server using the threading and socket libary only (without using the Standard HTTP libary)
+
 How to compile and run this program:
 
 To run this program in terminal, you need to cd to the directory of HTTPServer.py, then type this in termial: python HTTPServer.py 
