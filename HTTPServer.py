@@ -27,9 +27,11 @@ class clientThread(threading.Thread):
             fields = headers[0].split(" ")
             requestType = fields[0]
             requestedFileName = fields[1]
+            
+            acceptedRequestType = ["GET", "HEAD"]
             requestTypeNumber = 200
 
-            if requestType != "GET"  or requestType != "HEAD" or "favicon.ico" == requestedFileName:
+            if requestType not in acceptedRequestType:
                 requestTypeNumber = 400
             
             if requestTypeNumber == 400:
@@ -39,7 +41,7 @@ class clientThread(threading.Thread):
                 logging.getLogger('ThreadingHTTPServer').info(response)
                 self.live = False
             else:
-                if requestedFileName == "/":
+                if requestedFileName == "/" or requestedFileName == "favicon.ico":
                     requestedFileName = "/index.html"
 
                 # file found

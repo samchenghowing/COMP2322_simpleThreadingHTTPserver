@@ -1,0 +1,446 @@
+21:46:07,256 ThreadingHTTPServer INFO The logger is initialized
+21:46:07,256 ThreadingHTTPServer INFO Listening for incoming connections on port:80...
+21:46:39,728 ThreadingHTTPServer INFO [+] New thread started for 127.0.0.1:63100
+21:46:39,729 ThreadingHTTPServer INFO clientRequestStr is:
+GET / HTTP/1.1
+Host: 127.0.0.1
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="99", "Google Chrome";v="99"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "macOS"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.84 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: zh-HK,zh;q=0.9,en-US;q=0.8,en;q=0.7
+
+
+21:46:39,730 ThreadingHTTPServer INFO Listening for incoming connections on port:80...
+21:46:39,732 ThreadingHTTPServer INFO Response headerStr is:
+HTTP/1.1 200 OK
+Server: Python 2.7
+Last-Modified: Tue, 29 Mar 2022 20:40:02 GMT
+Content-Length: 145
+Keep-Alive: timeout=5, max=100
+Connection: Keep-Alive
+Content-Type: text/html
+
+
+21:50:07,753 ThreadingHTTPServer INFO clientRequestStr is:
+GET / HTTP/1.1
+Host: 127.0.0.1
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="99", "Google Chrome";v="99"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "macOS"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.84 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: zh-HK,zh;q=0.9,en-US;q=0.8,en;q=0.7
+If-Modified-Since: Tue, 29 Mar 2022 20:40:02 GMT
+
+
+21:50:07,754 ThreadingHTTPServer INFO Response headerStr is:
+HTTP/1.1 200 OK
+
+
+21:50:17,603 ThreadingHTTPServer INFO clientRequestStr is:
+
+21:50:17,606 ThreadingHTTPServer INFO [+] New thread started for 127.0.0.1:63208
+21:50:17,606 ThreadingHTTPServer INFO clientRequestStr is:
+GET / HTTP/1.1
+Host: 127.0.0.1
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="99", "Google Chrome";v="99"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "macOS"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.84 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: zh-HK,zh;q=0.9,en-US;q=0.8,en;q=0.7
+
+
+21:50:17,606 ThreadingHTTPServer INFO Listening for incoming connections on port:80...
+21:50:17,607 ThreadingHTTPServer INFO Response headerStr is:
+HTTP/1.1 200 OK
+Server: Python 2.7
+Last-Modified: Tue, 29 Mar 2022 20:40:02 GMT
+Content-Length: 145
+Keep-Alive: timeout=5, max=100
+Connection: Keep-Alive
+Content-Type: text/html
+
+
+21:57:03,964 ThreadingHTTPServer INFO clientRequestStr is:
+
+21:57:03,965 ThreadingHTTPServer INFO [+] New thread started for 127.0.0.1:63375
+21:57:03,965 ThreadingHTTPServer INFO Listening for incoming connections on port:80...
+21:57:03,965 ThreadingHTTPServer INFO clientRequestStr is:
+GET /abc.txt HTTP/1.1
+Host: 127.0.0.1
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="99", "Google Chrome";v="99"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "macOS"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.84 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: zh-HK,zh;q=0.9,en-US;q=0.8,en;q=0.7
+If-Modified-Since: Sat, 19 Mar 2022 17:41:04 GMT
+
+
+21:57:03,965 ThreadingHTTPServer INFO Response headerStr is:
+HTTP/1.1 200 OK
+
+
+22:00:13,134 ThreadingHTTPServer INFO clientRequestStr is:
+
+22:00:13,137 ThreadingHTTPServer INFO [+] New thread started for 127.0.0.1:63467
+22:00:13,137 ThreadingHTTPServer INFO clientRequestStr is:
+GET /abc.txt HTTP/1.1
+Host: 127.0.0.1
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="99", "Google Chrome";v="99"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "macOS"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.84 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: zh-HK,zh;q=0.9,en-US;q=0.8,en;q=0.7
+
+
+22:00:13,137 ThreadingHTTPServer INFO Listening for incoming connections on port:80...
+22:00:13,138 ThreadingHTTPServer INFO Response headerStr is:
+HTTP/1.1 200 OK
+Server: Python 2.7
+Last-Modified: Sat, 19 Mar 2022 17:41:04 GMT
+Content-Length: 33
+Keep-Alive: timeout=5, max=100
+Connection: Keep-Alive
+Content-Type: text/html
+
+
+22:06:40,149 ThreadingHTTPServer INFO clientRequestStr is:
+
+22:06:40,150 ThreadingHTTPServer INFO [+] New thread started for 127.0.0.1:63643
+22:06:40,150 ThreadingHTTPServer INFO clientRequestStr is:
+GET /test.png HTTP/1.1
+Host: 127.0.0.1
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="99", "Google Chrome";v="99"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "macOS"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.84 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: zh-HK,zh;q=0.9,en-US;q=0.8,en;q=0.7
+If-Modified-Since: Sat, 12 Mar 2022 19:50:26 GMT
+
+
+22:06:40,150 ThreadingHTTPServer INFO Listening for incoming connections on port:80...
+22:06:40,151 ThreadingHTTPServer INFO Response headerStr is:
+HTTP/1.1 200 OK
+
+
+22:07:01,610 ThreadingHTTPServer INFO clientRequestStr is:
+
+22:07:02,163 ThreadingHTTPServer INFO [+] New thread started for 127.0.0.1:63654
+22:07:02,163 ThreadingHTTPServer INFO clientRequestStr is:
+GET /test.png HTTP/1.1
+Host: 127.0.0.1
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="99", "Google Chrome";v="99"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "macOS"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.84 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: zh-HK,zh;q=0.9,en-US;q=0.8,en;q=0.7
+
+
+22:07:02,163 ThreadingHTTPServer INFO Listening for incoming connections on port:80...
+22:07:02,164 ThreadingHTTPServer INFO Response headerStr is:
+HTTP/1.1 200 OK
+Server: Python 2.7
+Last-Modified: Sat, 12 Mar 2022 19:50:26 GMT
+Accept-Ranges: bytes
+Content-Length: 3408
+Keep-Alive: timeout=5, max=100
+Connection: Keep-Alive
+Content-Type: image/png
+
+
+22:07:03,551 ThreadingHTTPServer INFO clientRequestStr is:
+GET /test.png HTTP/1.1
+Host: 127.0.0.1
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="99", "Google Chrome";v="99"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "macOS"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.84 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: zh-HK,zh;q=0.9,en-US;q=0.8,en;q=0.7
+If-Modified-Since: Sat, 12 Mar 2022 19:50:26 GMT
+
+
+22:07:03,551 ThreadingHTTPServer INFO Response headerStr is:
+HTTP/1.1 200 OK
+
+
+22:08:43,175 ThreadingHTTPServer INFO clientRequestStr is:
+
+22:08:43,178 ThreadingHTTPServer INFO [+] New thread started for 127.0.0.1:63703
+22:08:43,178 ThreadingHTTPServer INFO clientRequestStr is:
+GET /123 HTTP/1.1
+Host: 127.0.0.1
+Connection: keep-alive
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="99", "Google Chrome";v="99"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "macOS"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.84 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: zh-HK,zh;q=0.9,en-US;q=0.8,en;q=0.7
+
+
+22:08:43,179 ThreadingHTTPServer INFO Listening for incoming connections on port:80...
+22:08:43,179 ThreadingHTTPServer INFO HTTP/1.1 404 Not Found
+
+<html><body><h1>404 File Not Found</h1></body></html>
+22:08:43,179 ThreadingHTTPServer INFO Disconnected to client ..., killing thread for: 127.0.0.1:63703
+22:10:05,619 ThreadingHTTPServer INFO [+] New thread started for 127.0.0.1:63756
+22:10:05,620 ThreadingHTTPServer INFO clientRequestStr is:
+POST /test/ HTTP/1.1
+
+
+22:10:05,620 ThreadingHTTPServer INFO Listening for incoming connections on port:80...
+22:10:05,620 ThreadingHTTPServer INFO HTTP/1.1 400 Bad Request
+
+<html><body><h1>400 Bad Request</h1></body></html>
+22:10:05,620 ThreadingHTTPServer INFO Disconnected to client ..., killing thread for: 127.0.0.1:63756
+22:27:51,798 ThreadingHTTPServer INFO The logger is initialized
+22:27:51,799 ThreadingHTTPServer INFO Listening for incoming connections on port:80...
+22:28:05,139 ThreadingHTTPServer INFO [+] New thread started for 127.0.0.1:64364
+22:28:05,139 ThreadingHTTPServer INFO Listening for incoming connections on port:80...
+22:28:05,142 ThreadingHTTPServer INFO clientRequestStr is:
+GET / HTTP/1.1
+Host: 127.0.0.1
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:98.0) Gecko/20100101 Firefox/98.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+Upgrade-Insecure-Requests: 1
+Sec-Fetch-Dest: document
+Sec-Fetch-Mode: navigate
+Sec-Fetch-Site: none
+Sec-Fetch-User: ?1
+
+
+22:28:05,143 ThreadingHTTPServer INFO Response headerStr is:
+HTTP/1.1 200 OK
+Server: Python 2.7
+Last-Modified: Tue, 29 Mar 2022 20:40:02 GMT
+Content-Length: 145
+Keep-Alive: timeout=5, max=100
+Connection: Keep-Alive
+Content-Type: text/html
+
+
+22:28:11,143 ThreadingHTTPServer INFO clientRequestStr is:
+
+22:29:22,993 ThreadingHTTPServer INFO [+] New thread started for 127.0.0.1:64406
+22:29:22,994 ThreadingHTTPServer INFO Listening for incoming connections on port:80...
+22:29:23,112 ThreadingHTTPServer INFO clientRequestStr is:
+GET / HTTP/1.1
+Host: 127.0.0.1
+Upgrade-Insecure-Requests: 1
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.4 Safari/605.1.15
+Accept-Language: en-GB,en;q=0.9
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+
+
+22:29:23,113 ThreadingHTTPServer INFO Response headerStr is:
+HTTP/1.1 200 OK
+Server: Python 2.7
+Last-Modified: Tue, 29 Mar 2022 20:40:02 GMT
+Content-Length: 145
+Keep-Alive: timeout=5, max=100
+Connection: Keep-Alive
+Content-Type: text/html
+
+
+22:29:23,556 ThreadingHTTPServer INFO [+] New thread started for 127.0.0.1:64407
+22:29:23,557 ThreadingHTTPServer INFO clientRequestStr is:
+GET /favicon.ico HTTP/1.1
+Host: 127.0.0.1
+Connection: keep-alive
+Accept: */*
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.4 Safari/605.1.15
+Accept-Language: en-GB,en;q=0.9
+Referer: http://127.0.0.1/
+Accept-Encoding: gzip, deflate
+
+
+22:29:23,557 ThreadingHTTPServer INFO Listening for incoming connections on port:80...
+22:29:23,557 ThreadingHTTPServer INFO HTTP/1.1 404 Not Found
+
+<html><body><h1>404 File Not Found</h1></body></html>
+22:29:23,557 ThreadingHTTPServer INFO Disconnected to client ..., killing thread for: 127.0.0.1:64407
+22:29:33,857 ThreadingHTTPServer INFO [+] New thread started for 127.0.0.1:64414
+22:29:33,858 ThreadingHTTPServer INFO Listening for incoming connections on port:80...
+22:29:38,862 ThreadingHTTPServer INFO clientRequestStr is:
+
+22:29:48,521 ThreadingHTTPServer INFO [+] New thread started for 127.0.0.1:64422
+22:29:48,522 ThreadingHTTPServer INFO Listening for incoming connections on port:80...
+22:29:48,524 ThreadingHTTPServer INFO clientRequestStr is:
+GET /abc.txt HTTP/1.1
+Host: 127.0.0.1
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:98.0) Gecko/20100101 Firefox/98.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+Upgrade-Insecure-Requests: 1
+Sec-Fetch-Dest: document
+Sec-Fetch-Mode: navigate
+Sec-Fetch-Site: none
+Sec-Fetch-User: ?1
+
+
+22:29:48,525 ThreadingHTTPServer INFO Response headerStr is:
+HTTP/1.1 200 OK
+Server: Python 2.7
+Last-Modified: Sat, 19 Mar 2022 17:41:04 GMT
+Content-Length: 33
+Keep-Alive: timeout=5, max=100
+Connection: Keep-Alive
+Content-Type: text/html
+
+
+22:29:48,549 ThreadingHTTPServer INFO clientRequestStr is:
+GET /favicon.ico HTTP/1.1
+Host: 127.0.0.1
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:98.0) Gecko/20100101 Firefox/98.0
+Accept: image/avif,image/webp,*/*
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+Referer: http://127.0.0.1/abc.txt
+Sec-Fetch-Dest: image
+Sec-Fetch-Mode: no-cors
+Sec-Fetch-Site: same-origin
+
+
+22:29:48,549 ThreadingHTTPServer INFO HTTP/1.1 404 Not Found
+
+<html><body><h1>404 File Not Found</h1></body></html>
+22:29:48,550 ThreadingHTTPServer INFO Disconnected to client ..., killing thread for: 127.0.0.1:64422
+22:29:53,554 ThreadingHTTPServer INFO clientRequestStr is:
+
+22:31:26,211 ThreadingHTTPServer INFO [+] New thread started for 127.0.0.1:64486
+22:31:26,212 ThreadingHTTPServer INFO Listening for incoming connections on port:80...
+22:31:26,214 ThreadingHTTPServer INFO clientRequestStr is:
+GET /test.png HTTP/1.1
+Host: 127.0.0.1
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:98.0) Gecko/20100101 Firefox/98.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+Upgrade-Insecure-Requests: 1
+Sec-Fetch-Dest: document
+Sec-Fetch-Mode: navigate
+Sec-Fetch-Site: none
+Sec-Fetch-User: ?1
+
+
+22:31:26,215 ThreadingHTTPServer INFO Response headerStr is:
+HTTP/1.1 200 OK
+Server: Python 2.7
+Last-Modified: Sat, 12 Mar 2022 19:50:26 GMT
+Accept-Ranges: bytes
+Content-Length: 3408
+Keep-Alive: timeout=5, max=100
+Connection: Keep-Alive
+Content-Type: image/png
+
+
+22:31:32,216 ThreadingHTTPServer INFO clientRequestStr is:
+
+22:31:46,57 ThreadingHTTPServer INFO [+] New thread started for 127.0.0.1:64490
+22:31:46,58 ThreadingHTTPServer INFO Listening for incoming connections on port:80...
+22:31:46,59 ThreadingHTTPServer INFO clientRequestStr is:
+GET /111 HTTP/1.1
+Host: 127.0.0.1
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:98.0) Gecko/20100101 Firefox/98.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+Upgrade-Insecure-Requests: 1
+Sec-Fetch-Dest: document
+Sec-Fetch-Mode: navigate
+Sec-Fetch-Site: none
+Sec-Fetch-User: ?1
+
+
+22:31:46,60 ThreadingHTTPServer INFO HTTP/1.1 404 Not Found
+
+<html><body><h1>404 File Not Found</h1></body></html>
+22:31:46,60 ThreadingHTTPServer INFO Disconnected to client ..., killing thread for: 127.0.0.1:64490
